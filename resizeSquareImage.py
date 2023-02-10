@@ -11,12 +11,22 @@ ext = 'jpg'
 # Требуемое разрешение
 resolution = 600
 
-shutil.rmtree(out_dir)
+if (os.path.isdir(out_dir)):
+    shutil.rmtree(out_dir)
 os.mkdir(out_dir)
 for root, dirs, files in os.walk(source_dir):
     for filename in files:
         last_index = filename.rfind('.')
         output_file_name = f"{filename[0:last_index]}_{resolution}x{resolution}.{ext}"
         img = Image.open(f'{source_dir}/{filename}')
-        img.thumbnail(size=(resolution, resolution))
-        img.save(f"{out_dir}/{output_file_name}.{ext}", "JPEG")
+        new_img = img.resize((resolution, resolution))
+        try:
+            dpi = img.info['dpi']
+            new_img.save(f"{out_dir}/{output_file_name}.{ext}",
+                         "JPEG",
+                         dpi=dpi,
+                         quality=50)
+        except:
+            new_img.save(f"{out_dir}/{output_file_name}.{ext}",
+                         "JPEG",
+                         quality=50)

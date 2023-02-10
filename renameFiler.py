@@ -13,7 +13,8 @@ ext = 'jpg'
 # Качество изображения на выходе
 qlt = 65
 
-shutil.rmtree(out_dir)
+if (os.path.isdir(out_dir)):
+    shutil.rmtree(out_dir)
 os.mkdir(out_dir)
 for root, dirs, files in os.walk(source_dir):
     for filename in files:
