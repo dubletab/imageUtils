@@ -1,16 +1,19 @@
 import os
+import shutil
 from PIL import Image
 
 # Начальное значение файлов
 counter = 0
 # Исходная папка
-source_dir = './test'
+source_dir = './source'
 # Новая папка с преобразованными файлами
 out_dir = './output'
 # Расширение
 ext = 'jpg'
 # Качество изображения на выходе
 qlt = 65
+
+shutil.rmtree(out_dir)
 os.mkdir(out_dir)
 for root, dirs, files in os.walk(source_dir):
     for filename in files:
