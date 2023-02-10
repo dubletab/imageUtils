@@ -17,7 +17,7 @@ os.mkdir(out_dir)
 for root, dirs, files in os.walk(source_dir):
     for filename in files:
         last_index = filename.rfind('.')
-        output_file_name = f"{filename[0:last_index]}_{resolution}x{resolution}.{ext}"
+        output_file_name = f"{filename[0:last_index]}_{resolution}x{resolution}"
         img = Image.open(f'{source_dir}/{filename}')
         new_img = img.resize((resolution, resolution))
         try:
