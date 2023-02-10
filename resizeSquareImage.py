@@ -19,7 +19,8 @@ for root, dirs, files in os.walk(source_dir):
         last_index = filename.rfind('.')
         output_file_name = f"{filename[0:last_index]}_{resolution}x{resolution}"
         img = Image.open(f'{source_dir}/{filename}')
-        new_img = img.resize((resolution, resolution))
+        new_img = img.resize((resolution, resolution),
+                             Image.Resampling.LANCZOS)
         try:
             dpi = img.info['dpi']
             new_img.save(f"{out_dir}/{output_file_name}.{ext}",
